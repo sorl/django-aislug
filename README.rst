@@ -16,6 +16,6 @@ available ``AISlugField``.
 
 - ``invalid``: List or function that returns a list of invalid values
 
-_ ``queryset``: Queryset to use for making the slug unique within
+- ``queryset``: Queryset to use for making the slug unique within
   the queryset scope, default value is the default manager
 
