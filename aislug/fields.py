@@ -29,9 +29,10 @@ class AISlugField(models.SlugField):
         queryset = queryset.filter(**{'%s__startswith' % self.attname: slug})
         if not add:
             queryset = queryset.exclude(pk=obj.pk)
-        invalid = self.invalid
-        if callable(invalid):
-            invalid = invalid()
+        if callable(self.invalid):
+            invalid = self.invalid()
+        else:
+            invalid = self.invalid[:]
         invalid.extend(list(queryset.values_list(self.attname, flat=True)))
         _slug = slug
         counter = 1
