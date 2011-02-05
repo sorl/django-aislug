@@ -35,7 +35,7 @@ class AISlugField(models.SlugField):
             qs = queryset.filter(**{self.attname: _slug})
             if not add:
                 qs = qs.exclude(pk=obj.pk)
-            if _slug not in invalid and not qs:
+            if _slug not in invalid and not qs.count():
                 break
             _slug = '%s-%s' % (slug, counter)
             counter += 1
