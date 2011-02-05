@@ -18,4 +18,4 @@ available ``AISlugField``.
 
 _ ``queryset``: Queryset to use for making the slug unique within
   the queryset scope, default value is the default manager
-- 
+
