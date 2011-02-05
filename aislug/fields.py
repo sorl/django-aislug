@@ -21,21 +21,22 @@ class AISlugField(models.SlugField):
                 value = value()
         else:
             value = self.value_from_object(obj)
-        invalid = self.invalid
-        if callable(invalid):
-            invalid = invalid()
+        slug = self.slugify(value)
         if self.queryset is None:
             queryset = obj.__class__._default_manager
         else:
             queryset = self.queryset
-        slug = self.slugify(value)
+        queryset = queryset.filter(**{'%s__startswith' % self.attname: slug})
+        if not add:
+            queryset = queryset.exclude(pk=obj.pk)
+        invalid = self.invalid
+        if callable(invalid):
+            invalid = invalid()
+        invalid.extend(list(queryset.values_list(self.attname, flat=True)))
         _slug = slug
         counter = 1
         while True:
-            qs = queryset.filter(**{self.attname: _slug})
-            if not add:
-                qs = qs.exclude(pk=obj.pk)
-            if _slug not in invalid and not qs.count():
+            if _slug not in invalid:
                 break
             _slug = '%s-%s' % (slug, counter)
             counter += 1
