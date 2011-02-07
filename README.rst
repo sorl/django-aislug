@@ -19,3 +19,6 @@ available ``AISlugField``.
 - ``queryset``: Queryset to use for making the slug unique within
   the queryset scope, default value is the default manager
 
+- ``update``: If false the slug will not be updated  from ``populate_from`` on
+  subsequent saves.
+

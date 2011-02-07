@@ -15,12 +15,16 @@ class AISlugField(models.SlugField):
         super(AISlugField, self).__init__(*args, **kwargs)
 
     def pre_save(self, obj, add):
+        value = self.value_from_object(obj)
         if add or self.update:
-            value = getattr(obj, self.populate_from)
-            if callable(value):
-                value = value()
-        else:
-            value = self.value_from_object(obj)
+            # only compute slug if its a new record or if we have update set
+            if not self.editable or not value:
+                # if editable is True the user can set the base for slug
+                # themselves, however if the user passes an empty slug that
+                # means we should calculate it.
+                value = getattr(obj, self.populate_from)
+                if callable(value):
+                    value = value()
         slug = self.slugify(value)
         if self.queryset is None:
             queryset = obj.__class__._default_manager
