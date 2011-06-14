@@ -9,7 +9,7 @@ class TestCommand(test):
 
 setup(
     name='django-aislug',
-    version='0.2.1',
+    version='0.2.2',
     description='Intelligent slug computing',
     long_description=open('README.rst').read(),
     author='Mikko Hellsing',
@@ -21,7 +21,7 @@ setup(
     zip_safe=False,
     cmdclass={"test": TestCommand},
     install_requires=[
-        'django-stringfield>=0.1.3',
+        'django-stringfield>=0.1.4',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

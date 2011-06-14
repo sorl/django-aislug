@@ -8,6 +8,7 @@ class AISlugField(StringField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('db_index', True)
         kwargs.setdefault('editable', False)
+        kwargs.setdefault('blank', False)
         self.update = kwargs.pop('update', True)
         self.populate_from = kwargs.pop('populate_from', 'title')
         self.slugify = kwargs.pop('slugify', slugify)
