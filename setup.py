@@ -1,9 +1,15 @@
 from setuptools import setup, find_packages
+from setuptools.command.test import test
 
+
+class TestCommand(test):
+    def run(self):
+        from tests.runtests import runtests
+        runtests()
 
 setup(
     name='django-aislug',
-    version='0.1.1',
+    version='0.2.1',
     description='Intelligent slug computing',
     long_description=open('README.rst').read(),
     author='Mikko Hellsing',
@@ -11,8 +17,12 @@ setup(
     license='BSD',
     url='https://github.com/aino/django-ainslug',
     platforms='any',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests', 'tests.*']),
     zip_safe=False,
+    cmdclass={"test": TestCommand},
+    install_requires=[
+        'django-stringfield>=0.1.3',
+    ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
