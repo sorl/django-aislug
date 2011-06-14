@@ -39,5 +39,5 @@ available to ``AISlugField``. There are some additional options:
 
 * ``unique_for``: A list of fields to make this slug unique for.
 
-  * Default: ``None``
+  * Default: ``[]``
 
