@@ -21,7 +21,7 @@ setup(
     zip_safe=False,
     cmdclass={"test": TestCommand},
     install_requires=[
-        'django-stringfield>=0.1.4',
+        'django-stringfield>=0.1.5',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
